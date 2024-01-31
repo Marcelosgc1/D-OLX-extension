@@ -1,6 +1,6 @@
 class User:
-    def __init__(self, name, age, cpf):
+    def __init__(self, name, age, id):
         self.name=name
         self.age=age
-        self.cpf=cpf
+        self.cpf=id
         

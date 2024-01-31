@@ -1,6 +1,4 @@
-from User import User
+from models.User import User
 class Buyer(User):
-    def __init__(self, name, age, cpf):
-        super().__init__(name, age, cpf)
-        self.produtos=[]
-        
+    def __init__(self, name, age, id):
+        super().__init__(name, age, id)

@@ -8,3 +8,8 @@ class Persistency:
             Persistency.instance=Persistency()
         return Persistency.instance
     #SINGLETON :D
+
+    def __init__(self):
+        self.produtos_disponiveis=[]
+        self.produtos_vendidos=[]
+        

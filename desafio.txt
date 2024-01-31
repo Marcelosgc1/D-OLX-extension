@@ -16,7 +16,7 @@ Requisitos:
     Persistência:
 
         Implemente uma classe de persistência do tipo estoque para armazenar os produtos.
-    Os produtos vendidos devem ser removidos da coleção de produtos disponíveis e direcionados para uma coleção de produtos vendidos.
+        Os produtos vendidos devem ser removidos da coleção de produtos disponíveis e direcionados para uma coleção de produtos vendidos.
 
     Padrões de Design:
 
@@ -39,8 +39,8 @@ Opções de Desenvolvimento:
 
     Anúncio:
 
-    Um anúncio deve conter informações como nome, descrição, data de lançamento, nome e identificador do vendedor, tipo do produto, 
-    local de publicação (região), estado de uso (novo ou usado), identificador, quantidade disponível, comentários, etc.
+        Um anúncio deve conter informações como nome, descrição, data de lançamento, nome e identificador do vendedor, tipo do produto, 
+        local de publicação (região), estado de uso (novo ou usado), identificador, quantidade disponível, comentários, etc.
 
 #######
 
