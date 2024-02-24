@@ -13,3 +13,14 @@ class Persistency:
         self.produtos_disponiveis=[]
         self.produtos_vendidos=[]
         self.dicionario_usuarios={}
+
+    def get_usuarios(self):
+        return self.dicionario_usuarios
+    
+    def get_produtos_vendidos(self):
+        return self.produtos_vendidos
+    
+    def get_produtos_disponiveis(self):
+        return self.produtos_disponiveis
+    
+    
