@@ -20,7 +20,7 @@ def converter_cpf(cpf):
 
 
 def cadastrarUsuario(dicionario_de_usuarios, nome, idade, id):
-    if dicionario_de_usuarios.get(id)!=None:
+    if dicionario_de_usuarios.get(id)==None:
         novoUsuarioCompra=Buyer(nome, idade, id)
         novoUsuarioVenda=Seller(nome, idade, id)
         dicionario_de_usuarios[id]=(novoUsuarioCompra, novoUsuarioVenda)
