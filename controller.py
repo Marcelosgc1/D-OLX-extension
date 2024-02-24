@@ -1,6 +1,6 @@
 from models.Buyer import Buyer
 from models.Seller import Seller
-from Persistency.persistency import Persistency
+from models.persistency import Persistency
 
 persistencia=Persistency()
 
@@ -19,15 +19,14 @@ def converter_cpf(cpf):
 
 
 
-def cadastrarUsuario(dicionario_de_usuarios, nome, idade, id):
-    if dicionario_de_usuarios.get(id)==None:
-        novoUsuarioCompra=Buyer(nome, idade, id)
-        novoUsuarioVenda=Seller(nome, idade, id)
-        dicionario_de_usuarios[id]=(novoUsuarioCompra, novoUsuarioVenda)
-        persistencia.dicionario_usuarios=dicionario_de_usuarios
-        print(f'Usuário {nome} cadastrado com sucesso')
-        return True
-    else:
-        print('Já existe um usuário cadastrado com esse CPF')
+def cadastrarUsuario(dicionario_de_usuarios, nome, idade, id, telefone, email, nome_usuario, senha):
+    novoUsuarioCompra=Buyer(nome, idade, id, telefone, email, nome_usuario, senha)
+    novoUsuarioVenda=Seller(nome, idade, id, telefone, email, nome_usuario, senha)
+    if not novoUsuarioCompra or not novoUsuarioVenda:
+        print('Falha na criação do usuário, tente novamente')
         return False
+    dicionario_de_usuarios[id]=(novoUsuarioCompra, novoUsuarioVenda)
+    persistencia.dicionario_usuarios=dicionario_de_usuarios
+    print(f'Usuário {nome} cadastrado com sucesso')
+    return True
     
