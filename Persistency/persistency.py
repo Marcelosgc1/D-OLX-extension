@@ -12,4 +12,4 @@ class Persistency:
     def __init__(self):
         self.produtos_disponiveis=[]
         self.produtos_vendidos=[]
-        
+        self.dicionario_usuarios={}
