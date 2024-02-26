@@ -19,9 +19,9 @@ def converter_cpf(cpf):
 
 
 
-def cadastrarUsuario(dicionario_de_usuarios, nome, idade, id, telefone, email, nome_usuario, senha):
-    novoUsuarioCompra=Buyer(nome, idade, id, telefone, email, nome_usuario, senha)
-    novoUsuarioVenda=Seller(nome, idade, id, telefone, email, nome_usuario, senha)
+def cadastrarUsuario(dicionario_de_usuarios, nome, idade, id, telefone, email, senha):
+    novoUsuarioCompra=Buyer(nome, idade, id, telefone, email, senha)
+    novoUsuarioVenda=Seller(nome, idade, id, telefone, email, senha)
     if not novoUsuarioCompra or not novoUsuarioVenda:
         print('Falha na criação do usuário, tente novamente')
         return False
