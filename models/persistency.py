@@ -10,8 +10,8 @@ class Persistency:
     #SINGLETON :D
 
     def __init__(self):
-        self.produtos_disponiveis=[]
-        self.produtos_vendidos=[]
+        self.produtos_disponiveis={}
+        self.produtos_vendidos={}
         self.dicionario_usuarios={}
 
     def get_usuarios(self):
