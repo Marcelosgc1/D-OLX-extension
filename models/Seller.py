@@ -13,5 +13,11 @@ class Seller(User):
         self.password=password        
         self.produtos=[]
 
-    def buscarItem():
+    def publicarProduto():
+        pass
+
+    def vender():
+        pass
+
+    def editarPerfil():
         pass

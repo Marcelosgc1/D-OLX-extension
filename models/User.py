@@ -10,3 +10,7 @@ class User(ABC):
         self.phone=phone
         self.email=email
         self.password=password
+
+    @abstractclassmethod
+    def editarPerfil():
+        pass
