@@ -2,7 +2,7 @@ from models.User import User
 from persistency import Persistency
 
 class Buyer(User):
-    def __init__(self, name:str, age:int, id:int, phone, email, password):
+    def __init__(self, name:str, age:int, id:int, phone:int, email:str, password:str):
         self.name=name
         self.age=age
         if id in Persistency.get_instace().get_usuarios():
