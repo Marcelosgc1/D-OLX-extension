@@ -23,4 +23,8 @@ class Persistency:
     def get_produtos_disponiveis(self):
         return self.produtos_disponiveis
     
-    
+    def set_quantidade_disponiveis(self, id:int, mudanca:int):
+       self.produtos_disponiveis[id]+=mudanca
+
+    def set_quantidade_vendidos(self, id:int, mudanca:int):
+        self.produtos_vendidos[id]+=mudanca

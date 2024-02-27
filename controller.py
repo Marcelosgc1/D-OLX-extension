@@ -1,8 +1,9 @@
 from models.Buyer import Buyer
 from models.Seller import Seller
+from models.Product import Product
 from models.persistency import Persistency
 
-persistencia=Persistency()
+persistencia=Persistency.get_instace()
 
 def converter_cpf(cpf):
     while True:
@@ -19,7 +20,7 @@ def converter_cpf(cpf):
 
 
 
-def cadastrarUsuario(dicionario_de_usuarios, nome, idade, id, telefone, email, senha):
+def cadastrarUsuario(dicionario_de_usuarios:dict, nome:str, idade:int, id:int, telefone:int, email:str, senha:str):
     novoUsuarioCompra=Buyer(nome, idade, id, telefone, email, senha)
     novoUsuarioVenda=Seller(nome, idade, id, telefone, email, senha)
     if not novoUsuarioCompra or not novoUsuarioVenda:
@@ -30,3 +31,6 @@ def cadastrarUsuario(dicionario_de_usuarios, nome, idade, id, telefone, email, s
     print(f'Usuário {nome} cadastrado com sucesso')
     return True
     
+def computarVenda(id_item:int, qnt:int):
+    persistencia.set_quantidade_disponiveis(id_item,-qnt)
+    persistencia.set_quantidade_vendidos(id_item,qnt)
