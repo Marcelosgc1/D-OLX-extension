@@ -13,12 +13,17 @@ class Seller(User):
         self.email=email
         self.password=password        
         
-    def criarEPublicarProduto(product_name,description,fabrication_date,genre,location,new_product,quantity,seller_id,seller_name,dic_produtos_disponiveis):
-        novoProduto=Product(product_name,description,fabrication_date,seller_id,seller_name,genre,location,new_product,len(dic_produtos_disponiveis)+1,quantity)
+    def criarEPublicarProduto(product_name,description,fabrication_date,genre,location,new_product,quantity,seller_id,seller_name,dic_produtos_disponiveis,preco):
+        novoProduto=Product(product_name,description,fabrication_date,seller_id,seller_name,genre,location,new_product,len(dic_produtos_disponiveis)+1,quantity,preco)
         dic_produtos_disponiveis[novoProduto.product_id]=novoProduto
 
-    def vender():
-        pass
+    def vender(dic_produtos_disponiveis, id_comprador, id_item, dic_user):
+        print(f'Você quer vender {dic_produtos_disponiveis[id_item].quantity} para {dic_user[id_comprador].name}, pelo preço de {dic_produtos_disponiveis[id_item].quantity*dic_produtos_disponiveis[id_item].preco}?')
+        venda=input("(S/N): ").upper()
+        if venda=='S':
+            return True
+        else:
+            return False
 
     def editarPerfil():
         pass
