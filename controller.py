@@ -42,7 +42,7 @@ persistencia=Persistency.get_instace()
 
 menu1=1
 menu2=1
-
+#não foi implementado a main/arq principal
 while menu1==1:
     x=input("Bem vindo, quer se cadastrar ou fazer login? (C/L)")
     if x.upper()=='C':

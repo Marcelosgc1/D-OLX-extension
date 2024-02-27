@@ -24,6 +24,6 @@ class Seller(User):
             return True
         else:
             return False
-
+#não foi implementado
     def editarPerfil():
         pass

@@ -44,9 +44,9 @@ class Buyer(User):
             return realizado
         else:
             print('compra recusada')
-        
+#não foi implementado        
     def editarPerfil():
         pass
-
+#não foi implementado
     def permitirNotificacoes():
         pass
