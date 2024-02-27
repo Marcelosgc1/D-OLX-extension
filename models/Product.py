@@ -1,5 +1,5 @@
 class Product:
-    def __init__(self,product_name:str,description:str,fabrication_date:str,seller_id:int,seller_name:str,genre:str,location:str,new_product:int,product_id:int,quantity:int):
+    def __init__(self,product_name:str,description:str,fabrication_date:str,seller_id:int,seller_name:str,genre:str,location:str,new_product:bool,product_id:int,quantity:int):
         self.product_name=product_name
         self.description=description
         self.fabrication_date=fabrication_date

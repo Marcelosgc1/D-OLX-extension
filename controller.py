@@ -34,3 +34,4 @@ def cadastrarUsuario(dicionario_de_usuarios:dict, nome:str, idade:int, id:int, t
 def computarVenda(id_item:int, qnt:int):
     persistencia.set_quantidade_disponiveis(id_item,-qnt)
     persistencia.set_quantidade_vendidos(id_item,qnt)
+    return True

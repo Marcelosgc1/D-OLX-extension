@@ -1,4 +1,5 @@
 from models.User import User
+from models.Product import Product
 from persistency import Persistency
 
 class Seller(User):
@@ -13,8 +14,9 @@ class Seller(User):
         self.password=password        
         self.produtos=[]
 
-    def publicarProduto():
-        pass
+    def criarEPublicarProduto(product_name,description,fabrication_date,genre,location,new_product,quantity,seller_id,seller_name,dic_produtos_disponiveis):
+        novoProduto=Product(product_name,description,fabrication_date,seller_id,seller_name,genre,location,new_product,len(dic_produtos_disponiveis)+1,quantity)
+        dic_produtos_disponiveis[novoProduto.product_id]=novoProduto
 
     def vender():
         pass
