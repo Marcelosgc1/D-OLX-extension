@@ -1,5 +1,4 @@
 from abc import ABC, abstractclassmethod
-from models.persistency import Persistency
 
 class User(ABC):
     @abstractclassmethod
