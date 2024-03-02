@@ -24,6 +24,9 @@ class Buyer(User):
         confirmacao=input('Tem certeza que esse é o produto que você quer comprar? (S/N): ').upper()
         if confirmacao=='S':
             return True
+        else:
+            print('Compra encerrada.')
+            return False
         
     def realizarComentario(self,produto):
         comprado=0
@@ -34,10 +37,9 @@ class Buyer(User):
                     comentario=input('Realize um comentário sobre esse produto: ')
                     produto.comments[self.id]=comentario
                     return True
-                return False
-            if comprado==0:
-                print('Você não pode comentar sobre o produto sem ter comprado.')
-                return False
+        if comprado==0:
+            print('Você não pode comentar sobre o produto sem ter comprado.')
+            return False
 
 
 #não foi implementado        
