@@ -13,16 +13,16 @@ class Buyer(User):
         self.comprados=[]
 
 
-    def comprar(produto):
+    def comprar(self,produto):
         if produto.product_id not in Persistency.get_instance().get_produtos_disponiveis():
             print('Esse produto não está disponivel')
             return False
-        print(f"O produto é: {produto.product_name}; {produto.description}")
+        print(f"O produto é: {produto.product_name}; {produto.description}, por {produto.preco}")
         confirmacao=input('Tem certeza que esse é o produto que você quer comprar? (S/N): ').upper()
         if confirmacao=='S':
             return True
         
-    def realizarComentario(usuario,produto):
+    def realizarComentario(self,usuario,produto):
         for i in usuario.comprados:
             if i==produto.product_id:
                 if produto.comments.get(usuario.id)==None:

@@ -26,7 +26,7 @@ def realizarVenda(produto:Product,comprador:Buyer,vendedor:Seller):
         pedido_aceito=vendedor.vender(produto, comprador)
     if pedido_aceito:
         comprador.comprados.append(produto.product_id)
-        computada=computarVenda(produto.product_id)
+        computada=computarVenda(produto.product_id, produto)
     if computada:
         print('Venda realizada com sucesso!')
         return True
@@ -35,7 +35,7 @@ def realizarVenda(produto:Product,comprador:Buyer,vendedor:Seller):
 def buscarProduto(pesquisa):
     lista_pesquisa=[]
     for i in Persistency.get_instance().get_produtos_disponiveis():
-        if Persistency.get_instance().get_produtos_disponiveis()[i].genre==pesquisa or Persistency.get_instance().get_produtos_disponiveis()[i].nome==pesquisa:
+        if Persistency.get_instance().get_produtos_disponiveis()[i].genre==pesquisa or Persistency.get_instance().get_produtos_disponiveis()[i].product_name==pesquisa:
             lista_pesquisa.append(Persistency.get_instance().get_produtos_disponiveis()[i])
     for i in lista_pesquisa:
         print(f'{i.product_name}, {i.description}, data de fabricação do produto: {i.fabrication_date}, localização do produto: {i.location}, preço: {i.preco}R$', end=', ')
@@ -52,6 +52,23 @@ def checarComentarios(id):
             print(dic_dos_produtos[id].comments[i])
 
 
+
+
 ###mostrar no video
 #cadastrarUsuario('joao',21,1,12345678,'joao@gmail.com','joaosecreto')
 #cadastrarUsuario('joao',21,1,12345678,'joao@gmail.com','joaosecreto')
+#cadastrarUsuario('pedro',19,2,87654321,'pedro@gmail.com','pedrosecreto')
+#input()
+#fusquinha=Seller.criarEPublicarProduto('carro','fusca',1988,'automovel','feira de santana', False, 1, 30000)
+#Seller.criarEPublicarProduto('carro','onix',2024,'automovel','feira de santana', True, 1, 100000)
+#Seller.criarEPublicarProduto('volta ao mundo em 80 dias', 'livro de julio verne, capa dura', 2012, 'livro', 'feira de santana', 'False', 2, 20)
+#if fusquinha:
+#    print('criado!')
+#    input()
+#buscarProduto('carro')
+#
+#input()
+#
+#realizarVenda(Persistency.get_instance().get_produtos_disponiveis()[2], Persistency.get_instance().get_usuarios()[2][0], Persistency.get_instance().get_usuarios()[1][1])
+#
+#input()
