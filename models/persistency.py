@@ -3,7 +3,7 @@ class Persistency:
     instance = None
     
     @classmethod
-    def get_instace(Persistency):
+    def get_instance(Persistency):
         if not Persistency.instance:
             Persistency.instance=Persistency()
         return Persistency.instance
@@ -24,7 +24,16 @@ class Persistency:
         return self.produtos_disponiveis
     
     def set_quantidade_disponiveis(self, id:int, mudanca:int):
-       self.produtos_disponiveis[id].quantity+=mudanca
+        self.produtos_disponiveis[id].quantity+=mudanca
 
     def set_quantidade_vendidos(self, id:int, mudanca:int):
         self.produtos_vendidos[id]+=mudanca
+    
+    def set_novo_produto(self, id:int, produto:object):
+        self.produtos_disponiveis[id]=produto
+    
+    def set_produto_vendido(self, id:int, qnt_produto:int):
+        self.produtos_vendidos[id]=qnt_produto
+    
+    def set_novo_user(self, id, buyer:object, seller:object):
+        self.dicionario_usuarios[id]=(buyer,seller)

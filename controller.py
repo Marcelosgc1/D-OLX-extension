@@ -2,63 +2,59 @@ from models.Buyer import Buyer
 from models.Seller import Seller
 from models.Product import Product
 from models.persistency import Persistency
+from models.UsersFactory import User_Factory
 
 
-
-def converter_cpf(cpf):
-    while True:
-        try:
-            cpf=int(cpf.strip().replace('.','').replace('-',''))
-            if len(str(cpf))==11:
-                return cpf
-        except:
-            print('Você não inseriu seu CPF corretamente, tente de novo')
-            cpf=input("insira seu cpf novamente: (XXX.XXX.XXX-XX): ")
-        else:
-            print('Você não inseriu seu CPF corretamente, tente de novo')
-            cpf=input("insira seu cpf novamente: (XXX.XXX.XXX-XX): ")
-
-
-
-def cadastrarUsuario(dicionario_de_usuarios:dict, nome:str, idade:int, id:int, telefone:int, email:str, senha:str):
-    novoUsuarioCompra=Buyer(nome, idade, id, telefone, email, senha)
-    novoUsuarioVenda=Seller(nome, idade, id, telefone, email, senha)
-    if not novoUsuarioCompra or not novoUsuarioVenda:
+def cadastrarUsuario(nome, idade, id:int, telefone, email, senha):
+    novoUsuarioCompra=User_Factory.criar_Usuario(nome, idade, id, telefone, email, senha, 'Buyer')
+    novoUsuarioVenda=User_Factory.criar_Usuario(nome, idade, id, telefone, email, senha, 'Seller')
+    if novoUsuarioCompra==False or novoUsuarioVenda==False:
         print('Falha na criação do usuário, tente novamente')
         return False
-    dicionario_de_usuarios[id]=(novoUsuarioCompra, novoUsuarioVenda)
-    persistencia.dicionario_usuarios=dicionario_de_usuarios
+    
+    Persistency.get_instance().set_novo_user(id, novoUsuarioCompra, novoUsuarioVenda)
     print(f'Usuário {nome} cadastrado com sucesso')
     return True
     
 def computarVenda(id_item:int, qnt:int):
-    persistencia.set_quantidade_disponiveis(id_item,-qnt)
-    persistencia.set_quantidade_vendidos(id_item,qnt)
+    if Persistency.get_instance().get_produtos_vendidos().get(id_item)==None:
+        Persistency.get_instance().get_produtos_vendidos()[id_item]=0
+    Persistency.get_instance().set_quantidade_disponiveis(id_item,-qnt)
+    Persistency.get_instance().set_quantidade_vendidos(id_item,qnt)
     return True
 
+def realizarVenda(produto:Product,comprador:Buyer,vendedor:Seller, qnt_comprar:int):
+    pedido_realizado=comprador.comprar(produto, qnt_comprar)
+    if pedido_realizado:
+        pedido_aceito=vendedor.vender(produto, comprador)
+    if pedido_aceito:
+        comprador.comprados.append(produto.product_id)
+        computada=computarVenda(produto.product_id, qnt_comprar)
+    if computada:
+        print('Venda realizada com sucesso!')
+        return True
+    
 
-###principal
-persistencia=Persistency.get_instace()
-
-menu1=1
-menu2=1
-#não foi implementado a main/arq principal
-while menu1==1:
-    x=input("Bem vindo, quer se cadastrar ou fazer login? (C/L)")
-    if x.upper()=='C':
-        nome=input('nome: ')
-        idade=int(input('idade: '))
-        cpf=converter_cpf(input('cpf (XXX.XXX.XXX-XX): '))
-        telefone=int(input('telefone: '))
-        email=input('email: ')
-        senha=input('senha: ')
-        cadastrarUsuario(persistencia.get_usuarios(),nome,idade,cpf,telefone,email,senha)
-    elif x.upper()=='L':
-        cpf=converter_cpf(input('insira seu cpf: '))
-        senha=input('senha: ')
-        if persistencia.get_usuarios().get(cpf)==None:
-            print('Esse usuario não foi cadastrado.')
-        elif persistencia.get_usuarios().get(cpf)[0].password!=senha:
-            print('Senha errada.')
+def buscarProduto(pesquisa):
+    lista_pesquisa=[]
+    for i in Persistency.get_instance().get_produtos_disponiveis():
+        if Persistency.get_instance().get_produtos_disponiveis()[i].genre==pesquisa or Persistency.get_instance().get_produtos_disponiveis()[i].nome==pesquisa:
+            lista_pesquisa.append(Persistency.get_instance().get_produtos_disponiveis()[i])
+    for i in lista_pesquisa:
+        print(f'{i.product_name}, {i.description}, data de fabricação do produto: {i.fabrication_date}, localização do produto: {i.location}, quantidade disponível:{i.quantity}, por {i.preco}R$', end='')
+        if i.new_product:
+            print('produto usado.')
         else:
-            print(f"Bem vindo {persistencia.get_usuarios().get(cpf)[0].nome}!")
+            print('produto novo.')
+        print(f'ID do produto: {i.product_id}')
+
+def checarComentarios(id):
+    dic_dos_produtos=Persistency.get_instance().get_produtos_disponiveis()
+    if dic_dos_produtos.get(id)!=None:
+        for i in dic_dos_produtos[id].comments:
+            print(dic_dos_produtos[id].comments[i])
+
+
+###mostrar no video
+#cadastrarUsuario('joao',21,1,12345678,'joao@gmail.com','joaosecreto')
+#cadastrarUsuario('joao',21,1,12345678,'joao@gmail.com','joaosecreto')
