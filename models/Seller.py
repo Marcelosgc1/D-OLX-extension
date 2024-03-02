@@ -14,19 +14,20 @@ class Seller(User):
         self.password=password
         self.meusProdutos=[]
         
-    def criarEPublicarProduto(product_name,description,fabrication_date,genre,location,new_product,quantity,seller_id,seller_name,preco):
-        novoProduto=Product(product_name,description,fabrication_date,seller_id,seller_name,genre,location,new_product,len(Persistency.get_instance().get_produtos_disponiveis())+1,quantity,preco)
+    def criarEPublicarProduto(product_name,description,fabrication_date,genre,location,new_product,seller_id,seller_name,preco):
+        novoProduto=Product(product_name,description,fabrication_date,seller_id,seller_name,genre,location,new_product,len(Persistency.get_instance().get_produtos_disponiveis())+1,preco)
         Persistency.get_instance().set_novo_produto(novoProduto.product_id, novoProduto)
         Persistency.get_instance().get_usuarios()[seller_id][1].meusProdutos.append(novoProduto.product_id)
         return True
 
     def vender(produto, comprador):
-        print(f'Você quer vender {produto.quantity} para {comprador.name}, pelo preço de {produto.quantity*produto.preco}?')
+        print(f'Você quer vender {produto.product_name} para {comprador.name}, pelo preço de {produto.preco}?')
         venda=input("(S/N): ").upper()
         if venda=='S':
             return True
         else:
             return False
+        
 #não foi implementado
     def editarPerfil():
         pass

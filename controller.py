@@ -16,20 +16,17 @@ def cadastrarUsuario(nome, idade, id:int, telefone, email, senha):
     print(f'Usuário {nome} cadastrado com sucesso')
     return True
     
-def computarVenda(id_item:int, qnt:int):
-    if Persistency.get_instance().get_produtos_vendidos().get(id_item)==None:
-        Persistency.get_instance().get_produtos_vendidos()[id_item]=0
-    Persistency.get_instance().set_quantidade_disponiveis(id_item,-qnt)
-    Persistency.get_instance().set_quantidade_vendidos(id_item,qnt)
+def computarVenda(id_item:int, produto:Product):
+    Persistency.get_instance().set_produto_vendido(id_item, produto)
     return True
 
-def realizarVenda(produto:Product,comprador:Buyer,vendedor:Seller, qnt_comprar:int):
-    pedido_realizado=comprador.comprar(produto, qnt_comprar)
+def realizarVenda(produto:Product,comprador:Buyer,vendedor:Seller):
+    pedido_realizado=comprador.comprar(produto)
     if pedido_realizado:
         pedido_aceito=vendedor.vender(produto, comprador)
     if pedido_aceito:
         comprador.comprados.append(produto.product_id)
-        computada=computarVenda(produto.product_id, qnt_comprar)
+        computada=computarVenda(produto.product_id)
     if computada:
         print('Venda realizada com sucesso!')
         return True
@@ -41,11 +38,11 @@ def buscarProduto(pesquisa):
         if Persistency.get_instance().get_produtos_disponiveis()[i].genre==pesquisa or Persistency.get_instance().get_produtos_disponiveis()[i].nome==pesquisa:
             lista_pesquisa.append(Persistency.get_instance().get_produtos_disponiveis()[i])
     for i in lista_pesquisa:
-        print(f'{i.product_name}, {i.description}, data de fabricação do produto: {i.fabrication_date}, localização do produto: {i.location}, quantidade disponível:{i.quantity}, por {i.preco}R$', end='')
+        print(f'{i.product_name}, {i.description}, data de fabricação do produto: {i.fabrication_date}, localização do produto: {i.location}, preço: {i.preco}R$', end=', ')
         if i.new_product:
-            print('produto usado.')
-        else:
             print('produto novo.')
+        else:
+            print('produto usado.')
         print(f'ID do produto: {i.product_id}')
 
 def checarComentarios(id):

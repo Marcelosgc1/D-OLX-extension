@@ -15,12 +15,9 @@ class Buyer(User):
         self.comprados=[]
 
 
-    def comprar(produto, quantidade_para_comprar):
-        if produto.quantity==0:
-            print('Esse produto não está disponivel no momento')
-            return False
-        elif produto.quantity<quantidade_para_comprar:
-            print(f"Esse produto tem apenas {produto.quantity} exemplares.")
+    def comprar(produto):
+        if produto.product_id not in Persistency.get_instance().get_produtos_disponiveis():
+            print('Esse produto não está disponivel')
             return False
         print(f"O produto é: {produto.product_name}; {produto.description}")
         confirmacao=input('Tem certeza que esse é o produto que você quer comprar? (S/N): ').upper()
@@ -35,8 +32,8 @@ class Buyer(User):
                     produto.comments[usuario.id]=comentario
                     return True
                 return False
-            
-    
+
+
 #não foi implementado        
     def editarPerfil():
         pass
