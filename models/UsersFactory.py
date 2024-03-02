@@ -1,6 +1,6 @@
-from persistency import Persistency
-from Buyer import Buyer
-from Seller import Seller
+from models.persistency import Persistency
+from models.Buyer import Buyer
+from models.Seller import Seller
 
 class User_Factory:
     @staticmethod
