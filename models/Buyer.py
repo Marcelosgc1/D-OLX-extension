@@ -6,8 +6,6 @@ class Buyer(User):
     def __init__(self, name:str, age:int, id:int, phone:int, email:str, password:str):
         self.name=name
         self.age=age
-        if id in Persistency.get_instance().get_usuarios():
-            return False
         self.id=id
         self.phone=phone
         self.email=email
